@@ -42,7 +42,7 @@ func ReceiveFile(ip string) {
 		return
 	}
 	files := receiveNumberOfFile(firstConn)
-	fmt.Printf("Total: %d file(s).", files)
+	fmt.Printf("Total: %d file(s).\n", files)
 	if files <= 0 {
 		return
 	}

@@ -49,7 +49,7 @@ func SendFile(ip, targetDir, filename string) {
 	}
 	// 限制 goroutine 数量
 	var limit, total int
-	limit = 2
+	limit = 16
 	total = len(input)
 
 	// 传输文件数量
@@ -107,7 +107,7 @@ func sendFileHandle(ip, targetDir string, fileinfo fileInfo) {
 		fmt.Printf("get tcp conn failed.\n")
 		return
 	}
-	defer util.ReleaseConn(conn)
+	// defer util.ReleaseConn(conn)
 
 	// 拼接文件夹+文件名+文件大小
 	nameBuf := make([]byte, 4096)
