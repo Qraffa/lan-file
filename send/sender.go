@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"net"
 	"os"
 	"path/filepath"
 	"sync"
@@ -102,12 +103,17 @@ func sendNumberOfFile(files int) {
 
 func sendFileHandle(ip, targetDir string, fileinfo fileInfo) {
 	// get tcp conn
-	conn := util.GetConn()
-	if conn == nil {
-		fmt.Printf("get tcp conn failed.\n")
+	// conn := util.GetConn()
+	// if conn == nil {
+	// 	fmt.Printf("get tcp conn failed.\n")
+	// 	return
+	// }
+	// defer util.ReleaseConn(conn)
+	conn, err := net.Dial("tcp", ip)
+	if err != nil {
+		fmt.Printf("dial err:%s\n", err)
 		return
 	}
-	// defer util.ReleaseConn(conn)
 
 	// 拼接文件夹+文件名+文件大小
 	nameBuf := make([]byte, 4096)
